@@ -27,13 +27,13 @@ def index(request):
     }
     return render(request,'cobook/index.html', context)
 
-# @login_required
-# def index(request):
-#     coworks = Cowork.objects.all()
-#     context={
-#       'coworks':coworks
-#     }
-#     return render(request,'cobook/index.html', context)
+@login_required
+def rooms(request):
+    rooms = Rooms.objects.all()
+    context={
+      'rooms':rooms
+    }
+    return render(request,'cobook/rooms.html', context)
 
 # def room(request):
 #     coworks = Cowork.objects.all()
