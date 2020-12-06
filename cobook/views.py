@@ -29,7 +29,7 @@ def index(request):
 
 @login_required
 def rooms(request):
-    rooms = Rooms.objects.all()
+    rooms = Room.objects.all()
     context={
       'rooms':rooms
     }
