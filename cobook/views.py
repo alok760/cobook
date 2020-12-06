@@ -40,20 +40,29 @@ def rooms(request,id):
 
 
 def bookroom(request):
-    context ={}
-
-    # create object of form
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, "cobook/booking_confirm.html", context)
+            #pass  # does nothing, just trigger the validation
+        else:
+            breakpoint()
+    
     form = BookingForm()
-
     context={
       'form':form
     }
-
     return render(request, "cobook/booking.html", context)
 
-# def room(request):
-#     coworks = Cowork.objects.all()
-#     context={
-#       'object':object
-#     }
-#     return render(request,'cobook/index.html', context)
+# def bookroom(request):
+#     if request.method == 'POST':
+#         form = ContactForm(request.POST)
+#         if form.is_valid():
+#             pass  # does nothing, just trigger the validation
+#     else:
+#         form = BookingForm()
+#         context={
+#           'form':form
+#         }
+#     return render(request, "cobook/booking.html", context)
