@@ -29,7 +29,8 @@ def index(request):
 
 @login_required
 def rooms(request,id):
-    rooms = Room.objects.all()
+    cowork = Cowork.objects.filter(id=id).last()
+    rooms = cowork.room_set.all()
     context={
       'rooms':rooms
     }

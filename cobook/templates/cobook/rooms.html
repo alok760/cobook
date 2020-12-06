@@ -1,6 +1,6 @@
 {% extends "cobook/base.html" %}
 {% block content %}
-      <h1 style="margin-bottom: 50px;">Available Coworking Spaces</h1>
+      <h1 style="margin-bottom: 50px;">Available Rooms</h1>
 
       <div class="row">
         {% for room in rooms %}
@@ -11,7 +11,7 @@
               <p><b>{{room.name}}</b></p>
               <!-- <p class="card-text">Booking Timings: 9am to 5pm </p> -->
               <p class="card-text">Can House: {{room.capacity}} people </p>
-            
+
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                   <button type="button" class="btn btn-sm btn-outline-secondary">Book</button>
