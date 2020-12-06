@@ -43,6 +43,9 @@ class Cowork(BaseModel):
         help_text='Enter the number of room the Coworking space have'
     )
 
+    def __str__(self):
+        return self.name
+
 
 class Room(BaseModel):
     """
@@ -66,6 +69,9 @@ class Room(BaseModel):
         blank=False,
         on_delete=models.CASCADE
     )
+
+    def __str__(self):
+        return self.cowork.name + '-' + self.name 
 
 
 class Booking(BaseModel):

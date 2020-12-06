@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from .models import *
-from .forms import GeeksForm
+from .forms import *
 
 # Create your views here.
 # Problem - Meeting Room Booking
@@ -43,17 +43,13 @@ def bookroom(request):
     context ={}
 
     # create object of form
-    form = BookingForm(request.POST or None, request.FILES or None)
+    form = BookingForm()
 
-    # check if form data is valid
-    if form.is_valid():
-        # save the form data to model
-        form.save()
-    else:
-        breakpoint()
+    context={
+      'form':form
+    }
 
-    context['form']= form
-    return render(request, "booking.html", context)
+    return render(request, "cobook/booking.html", context)
 
 # def room(request):
 #     coworks = Cowork.objects.all()
