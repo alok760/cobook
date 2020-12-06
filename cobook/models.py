@@ -37,6 +37,12 @@ class Cowork(BaseModel):
         help_text='Enter the number of room the Coworking space have'
     )
 
+    zipcode = models.PositiveIntegerField(
+        null=False,
+        blank=False,
+        help_text='Enter the number of room the Coworking space have'
+    )
+
 
 class Room(BaseModel):
     """
