@@ -43,6 +43,19 @@ class Cowork(BaseModel):
         help_text='Enter the number of room the Coworking space have'
     )
 
+    start_time = models.TimeField(
+        default='09:00:00',
+        null=False,
+        blank=False,
+        help_text='Enter when the coworking space opens'
+    )
+    end_time = models.TimeField(
+        default='20:00:00',
+        null=False,
+        blank=False,
+        help_text='Enter the closing time of coworking space'
+    )
+
     def __str__(self):
         return self.name
 
@@ -71,7 +84,7 @@ class Room(BaseModel):
     )
 
     def __str__(self):
-        return self.cowork.name + '-' + self.name 
+        return self.cowork.name + '-' + self.name
 
 
 class Booking(BaseModel):
@@ -90,12 +103,18 @@ class Booking(BaseModel):
         blank=False,
         on_delete=models.CASCADE
     )
-    start_time = models.DateTimeField(
+    start_time = models.TimeField(
         null=False,
         blank=False,
         help_text='Enter the booking start time'
     )
-    end_time = models.DateTimeField(
+    end_time = models.TimeField(
+        null=False,
+        blank=False,
+        help_text='Enter the booking end time'
+    )
+
+    date = models.DateField(
         null=False,
         blank=False,
         help_text='Enter the booking end time'

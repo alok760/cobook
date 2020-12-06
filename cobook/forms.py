@@ -4,4 +4,5 @@ from .models import *
 class BookingForm(forms.ModelForm):
     class Meta:
         model = Booking
-        fields = "__all__"
+        fields = ['start_time', 'end_time', 'date']
+        widgets = {'date': forms.DateInput(attrs={'id': 'datetimepicker12'})}
