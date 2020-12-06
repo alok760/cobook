@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
+from .models import *
 
 # Create your views here.
 # Problem - Meeting Room Booking
@@ -20,4 +21,23 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def index(request):
-    return render(request,'cobook/index.html')
+    coworks = Cowork.objects.all()
+    context={
+      'coworks':coworks
+    }
+    return render(request,'cobook/index.html', context)
+
+# @login_required
+# def index(request):
+#     coworks = Cowork.objects.all()
+#     context={
+#       'coworks':coworks
+#     }
+#     return render(request,'cobook/index.html', context)
+
+# def room(request):
+#     coworks = Cowork.objects.all()
+#     context={
+#       'object':object
+#     }
+#     return render(request,'cobook/index.html', context)
