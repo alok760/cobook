@@ -31,6 +31,7 @@ LOGIN_REDIRECT_URL = 'home'
 # Application definition
 
 INSTALLED_APPS = [
+    'cobook',
     'accounts',
     'django.contrib.admin',
     'django.contrib.auth',

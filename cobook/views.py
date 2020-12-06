@@ -1,4 +1,8 @@
 from django.shortcuts import render
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 # Problem - Meeting Room Booking
@@ -13,3 +17,7 @@ from django.shortcuts import render
 # - hosted application
 # - codebase shared via Github
 # - usage instructions if any
+
+@login_required
+def index(request):
+    return render(request,'cobook/index.html')

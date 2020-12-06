@@ -5,9 +5,7 @@ from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
-@login_required
-def index(request):
-    return render(request,'accounts/index.html')
+
 def sign_up(request):
     context = {}
     form = UserCreationForm(request.POST or None)
