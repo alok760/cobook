@@ -28,11 +28,12 @@ def index(request):
     return render(request,'cobook/index.html', context)
 
 @login_required
-def rooms(request):
+def rooms(request,id):
     rooms = Room.objects.all()
     context={
       'rooms':rooms
     }
+    #breakpoint()
     return render(request,'cobook/rooms.html', context)
 
 # def room(request):
