@@ -12,9 +12,9 @@ from datetime import date
 #
 # Specs:
 # - View nearby meeting-room providers / coworks
-# - Coworks' start and end times of the day varies
-# - Booking to be done on an hourly basis
-# - View availabilities of meeting-rooms with room info
+# - Coworks' start and end times of the day varies - done, validation remains
+# - Booking to be done on an hourly basis - done
+# - View availabilities of meeting-rooms with room info - done
 #
 # What is expected:
 # - hosted application
@@ -43,9 +43,16 @@ def rooms(request,id):
 def bookroom(request,id):
 
     if request.method == 'POST':
+
         if 'a_date' in request.POST:
-            breakpoint()
-            data = availability(date.today(),1)
+            av_data = availability(request.POST['a_date'],id)
+            form = BookingForm()
+            #breakpoint()
+            context={
+              'date':request.POST['a_date'],
+              'form':form,
+              'availability':av_data
+            }
             #breakpoint()
             return render(request, "cobook/booking.html", context)
 
@@ -67,7 +74,6 @@ def bookroom(request,id):
 
     form = BookingForm()
     context={
-      'room_schedule': None,
       'form':form
     }
     data = availability(date.today(),1)
@@ -78,10 +84,10 @@ def bookroom(request,id):
 
 
 def availability(date, room_id):
-    books = Booking.objects.filter(date=date.today())
+    books = Booking.objects.filter(date=date)
     data = []
     for book in books:
-        data.append([book.user.username, str(book.start_time),str(book.end_time)])
+        data.append([book.user.username, str(book.start_time)[:-3],str(book.end_time)[:-3]])
     return data
 
 def your_bookings():

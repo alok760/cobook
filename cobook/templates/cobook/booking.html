@@ -14,46 +14,38 @@
     </div>
 
     <div class="col">
-      <h2 style="margin-bottom: 60px;"> Check Availability </h2>
+      <h2 style="margin-bottom: 60px;"> Check Schedule </h2>
       <form method="post" class="form-inline" novalidate>
-
+        {% csrf_token %}
          <div class="form-group mx-sm-5 mb-2">
            <label for="a_date" class="sr-only">Date</label>
-           <input type="Date" class="form-control" id="a_date" placeholder="Password">
+           <input type="Date" class="form-control" id="a_date" name="a_date" placeholder="Date">
          </div>
          <button type="submit" class="btn btn-primary mb-2">Confirm Date</button>
       </form>
       <br>
+      {% if availability %}
+      <h5> Schedule for date {{date}} </h5>
       <table class="table table-striped">
           <thead>
             <tr>
-              <th scope="col">#</th>
+
               <th scope="col">Booking For</th>
               <th scope="col">Meeting Start Time</th>
               <th scope="col">Meeting End time</th>
             </tr>
           </thead>
           <tbody>
+            {% for av_data in availability %}
             <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
+              <td>{{av_data.0}}</td>
+              <td>{{av_data.1}}</td>
+              <td>{{av_data.2}}</td>
             </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>Larry</td>
-              <td>the Bird</td>
-              <td>@twitter</td>
-            </tr>
+            {% endfor %}
           </tbody>
         </table>
+      {% endif %}
     </div>
   </div>
 
