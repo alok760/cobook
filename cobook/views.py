@@ -73,13 +73,15 @@ def bookroom(request,id):
                 }
                 return render(request, "cobook/error_page.html", context)
 
-            request_date = request.POST['date']
-            rdate = datetime.strptime(request_date, '%Y-%m-%d')
+            request_datetime = request.POST['date'] + " " + request.POST['start_time']
+
+            rdate = datetime.strptime(request_datetime, '%Y-%m-%d %H:%M')
             now = datetime.now()
-            
+
+
             if now > rdate:
                 context={
-                  'error_message':"Connot Book for past Date."
+                  'error_message':"Connot Book for past Date or Time."
                 }
                 return render(request, "cobook/error_page.html", context)
 
