@@ -10,3 +10,4 @@ class BookingForm(forms.ModelForm):
             'start_time': forms.DateInput(attrs={'type': 'time'}),
             'end_time': forms.DateInput(attrs={'type': 'time'})
         }
+        # widgets = {'date': forms.DateInput(attrs={'id': 'datetimepicker12'})}

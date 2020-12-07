@@ -41,14 +41,22 @@ def rooms(request,id):
 
 def bookroom(request):
     if request.method == 'POST':
-        form = ContactForm(request.POST)
+        book = Booking()
+        book.room = Room.objects.last()
+        book.user = request.user
+        book.is_active = True
+        form = BookingForm(request.POST, instance = book)
+
         if form.is_valid():
+            context={
+              'something':"something"
+            }
             form.save()
             return render(request, "cobook/booking_confirm.html", context)
             #pass  # does nothing, just trigger the validation
         else:
             breakpoint()
-    
+
     form = BookingForm()
     context={
       'form':form

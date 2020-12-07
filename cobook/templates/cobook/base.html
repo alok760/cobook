@@ -45,11 +45,23 @@
 
   </head>
   <body>
-    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-      <h5 class="my-0 mr-md-auto font-weight-normal">cobook</h5>
-      <a class="btn btn-outline-primary" style="margin-right: 5px; float:right;" href="#">Log in</a>
-      <a class="btn btn-outline-danger" href="#">Sign up</a>
-    </div>
+    <!-- Grey with black text -->
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <ul class="navbar-nav">
+    <li class="nav-item active">
+      <a class="nav-link" href="{% url 'home' %}">Cobook</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Link</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Link</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link disabled" href="#">Disabled</a>
+    </li>
+  </ul>
+</nav>
 
 
   <div class="album py-5 bg-light">
