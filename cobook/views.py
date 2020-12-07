@@ -41,38 +41,37 @@ def sort_by_location(cws,zip):
     #breakpoint()
     distances = {}
 
-    # try:
-    with open('out.csv', newline='') as f:
-        reader = csv.reader(f)
-        data = list(reader)
+    try:
+        with open('out.csv', newline='') as f:
+            reader = csv.reader(f)
+            data = list(reader)
 
-    zipstr = str(zip) + '.0'
-
-    for row in data:
-        if row[0] == zipstr:
-            lat1 = radians(float(row[1]))
-            lon1 = radians(float(row[2]))
-            break
-
-    for cw in cws:
-
-        zip1 = cw.zipcode
-        zip1str = str(zip1) + '.0'
+        zipstr = str(zip) + '.0'
 
         for row in data:
-            if row[0] == zip1str:
-                lat2 = radians(float(row[1]))
-                lon2 = radians(float(row[2]))
+            if row[0] == zipstr:
+                lat1 = radians(float(row[1]))
+                lon1 = radians(float(row[2]))
                 break
 
-        dist = distance_calc(lat1,lon1,lat2,lon2)
-        distances[cw] = dist
-    sorted_distances = dict(sorted(distances.items(), key=lambda x: x[1]))
-    return list(sorted_distances.keys())
-    breakpoint()
+        for cw in cws:
 
-    # except:
-    #     return cws
+            zip1 = cw.zipcode
+            zip1str = str(zip1) + '.0'
+
+            for row in data:
+                if row[0] == zip1str:
+                    lat2 = radians(float(row[1]))
+                    lon2 = radians(float(row[2]))
+                    break
+
+            dist = distance_calc(lat1,lon1,lat2,lon2)
+            distances[cw] = dist
+        sorted_distances = dict(sorted(distances.items(), key=lambda x: x[1]))
+        return list(sorted_distances.keys())
+
+    except:
+        return cws
 
 @login_required
 def index(request):
