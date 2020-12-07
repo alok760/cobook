@@ -39,10 +39,10 @@ def rooms(request,id):
     return render(request,'cobook/rooms.html', context)
 
 
-def bookroom(request):
+def bookroom(request,id):
     if request.method == 'POST':
         book = Booking()
-        book.room = Room.objects.last()
+        book.room = Room.objects.filter(id=id).last()
         book.user = request.user
         book.is_active = True
         form = BookingForm(request.POST, instance = book)
@@ -55,7 +55,7 @@ def bookroom(request):
             return render(request, "cobook/booking_confirm.html", context)
             #pass  # does nothing, just trigger the validation
         else:
-            breakpoint()
+            return render(request, "cobook/error_page.html")
 
     form = BookingForm()
     context={
