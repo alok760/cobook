@@ -1,10 +1,11 @@
 {% extends "cobook/base.html" %}
+{% load crispy_forms_tags %}
 {% block content %}
-  <h2 style="margin-bottom: 50px;">Meeting Room Booking Form </h1>
+  <h1 style="margin-bottom: 50px;">Book Room</h1>
   <form method="post" novalidate>
     {% csrf_token %}
-    {% include 'cobook/bs4_form.html' with form=form %}
-    <button type="submit" class="btn btn-primary">Submit</button>
+    {{ form|crispy }}
+    <button type="submit" class="btn btn-success">Book!</button>
   </form>
 
 {% endblock %}
