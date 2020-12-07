@@ -84,7 +84,7 @@ class Room(BaseModel):
     )
 
     def __str__(self):
-        return self.cowork.name + '-' + self.name
+        return self.cowork.name + ' - ' + self.name
 
 
 class Booking(BaseModel):

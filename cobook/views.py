@@ -24,8 +24,13 @@ from datetime import date, datetime
 @login_required
 def index(request):
     coworks = Cowork.objects.all()
+    meow = []
+    for obj in coworks:
+        meow.append(obj)
+    if request.method == 'POST':
+        pass
     context={
-      'coworks':coworks
+      'coworks':meow
     }
     return render(request,'cobook/index.html', context)
 

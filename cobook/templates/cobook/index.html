@@ -2,7 +2,17 @@
 {% load static %}
 {% block content %}
       <h1 style="margin-bottom: 50px;">Available Coworking Spaces</h1>
-
+      <div class="row">
+        <form class="form-inline">
+          <div class="form-group mx-sm-3 mb-2">
+            Sort by Area Code &nbsp;&nbsp;
+            <label for="pin" class="sr-only">Sort by your area pincode</label>
+            <input type="password" class="form-control" id="pin" name="pin"placeholder="Pincode">
+          </div>
+          <button type="submit" class="btn btn-primary mb-2">Confirm Pincode</button>
+        </form>
+      </div>
+      <br>
       <div class="row">
         {% for cowork in coworks %}
         <div class="col-md-4">
