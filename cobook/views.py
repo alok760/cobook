@@ -201,7 +201,7 @@ def bookroom(request,id):
 
 
 def availability(date, room_id):
-    books = Booking.objects.filter(date=date)
+    books = Booking.objects.filter(date=date, room_id=room_id)
     data = []
     for book in books:
         data.append([book.user.username, str(book.start_time)[:-3],str(book.end_time)[:-3]])
