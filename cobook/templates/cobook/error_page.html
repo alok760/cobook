@@ -1,5 +1,8 @@
 {% extends "cobook/base.html" %}
 {% block content %}
-  <h2 style="margin-bottom: 50px;">Something Went Wrong! </h2>
-
+  {% if error_message %}
+  <h2 style="margin-bottom: 50px;"> {{ error_message }} </h2>
+  {% else %}
+  <h2 style="margin-bottom: 50px;"> Something Went Wrong! </h2>
+  {% endif %}
 {% endblock %}

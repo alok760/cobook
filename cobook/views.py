@@ -63,6 +63,36 @@ def bookroom(request,id):
         form = BookingForm(request.POST, instance = book)
 
         if form.is_valid():
+            av_data = availability(request.POST['date'],id)
+            start_time = request.POST['start_time']
+            end_time = request.POST['end_time']
+
+            if not start_time < end_time:
+                context={
+                  'error_message':"Start Time must be less than End Time."
+                }
+                return render(request, "cobook/error_page.html", context)
+
+
+            for adata in av_data:
+                s_time = adata[1]
+                e_time = adata[2]
+                breakpoint()
+                if start_time > s_time and start_time < e_time:
+                    context={
+                      'error_message':"Meeting Time collides with other Meetings."
+                    }
+                    return render(request, "cobook/error_page.html", context)
+
+                if end_time > s_time and end_time < e_time:
+                    context={
+                      'error_message':"Meeting Time collides with other Meetings."
+                    }
+                    return render(request, "cobook/error_page.html", context)
+
+            ## current time
+                # breakpoint()
+                # pass
             context={
               'message':"success"
             }
