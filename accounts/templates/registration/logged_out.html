@@ -1,1 +1,10 @@
-<h1> You are now logged out {{ user }} </h1>
+{% extends "cobook/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+  <div class="row">
+    <h1> You are now logged out {{ user }} </h1>
+
+  </div>
+
+{% endblock %}
