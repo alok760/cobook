@@ -80,12 +80,16 @@ def index(request):
     cws = []
     for cw in coworks:
         cws.append(cw)
-    if request.method == 'POST':
-        zip = request.POST["pin"]
-        cws = sort_by_location(cws,zip)
     context={
       'coworks':cws
     }
+    if request.method == 'POST':
+        zip = request.POST["pin"]
+        cws = sort_by_location(cws,zip)
+        context={
+          'zip':zip,
+          'coworks':cws
+        }
     return render(request,'cobook/index.html', context)
 
 @login_required
