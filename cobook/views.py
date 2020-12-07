@@ -21,16 +21,21 @@ from datetime import date, datetime
 # - codebase shared via Github
 # - usage instructions if any
 
+def sort_by_location(cws,zip):
+    #breakpoint()
+    return cws
+
 @login_required
 def index(request):
     coworks = Cowork.objects.all()
-    meow = []
-    for obj in coworks:
-        meow.append(obj)
+    cws = []
+    for cw in coworks:
+        cws.append(cw)
     if request.method == 'POST':
-        pass
+        zip = request.method["pin"]
+        cws = sort_by_location(cws,zip)
     context={
-      'coworks':meow
+      'coworks':cws
     }
     return render(request,'cobook/index.html', context)
 
