@@ -171,7 +171,7 @@ def bookroom(request,id):
                 # breakpoint()
                 if start_time > s_time and start_time < e_time:
                     context={
-                      'error_message':"Meeting Time collides with other Meetings."
+                      'error_message':"Meeting Time collides with other Meetings. Please Select different date or time slots"
                     }
                     return render(request, "cobook/error_page.html", context)
 

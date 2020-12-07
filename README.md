@@ -21,7 +21,7 @@
 ![Alt text](images/book_and_preview.png?raw=true "Title")
 
 - Prevent Bookings for past or overlapping date and times.
-![Alt text](images/index.png?raw=true "Title")
+![Alt text](images/collide.png?raw=true "Title")
 
 - Watch your booking details.
 ![Alt text](images/my_bookings.png?raw=true "Title")
