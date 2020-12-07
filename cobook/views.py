@@ -43,6 +43,12 @@ def rooms(request,id):
 def bookroom(request,id):
 
     if request.method == 'POST':
+        if 'a_date' in request.POST:
+            breakpoint()
+            data = availability(date.today(),1)
+            #breakpoint()
+            return render(request, "cobook/booking.html", context)
+
         book = Booking()
         book.room = Room.objects.filter(id=id).last()
         book.user = request.user
@@ -51,7 +57,7 @@ def bookroom(request,id):
 
         if form.is_valid():
             context={
-              'something':"something"
+              'message':"success"
             }
             form.save()
             return render(request, "cobook/booking_confirm.html", context)
@@ -67,6 +73,8 @@ def bookroom(request,id):
     data = availability(date.today(),1)
     #breakpoint()
     return render(request, "cobook/booking.html", context)
+
+
 
 
 def availability(date, room_id):

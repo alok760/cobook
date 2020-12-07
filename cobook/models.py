@@ -14,7 +14,7 @@ class BaseModel(models.Model):
 
 class Cowork(BaseModel):
     """
-    This stores details of conference rooms available
+    This stores details of the Co-Working Space
     """
 
     ##User who owns the space
