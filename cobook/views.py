@@ -6,6 +6,8 @@ from django.contrib.auth.decorators import login_required
 from .models import *
 from .forms import *
 from datetime import date, datetime
+from math import sin, cos, sqrt, atan2, radians
+
 
 # Create your views here.
 # Problem - Meeting Room Booking
@@ -21,8 +23,46 @@ from datetime import date, datetime
 # - codebase shared via Github
 # - usage instructions if any
 
+def distance_calc(lat1,lon1,lat2,lon2):
+    R = 6373.0
+
+    lat1 = radians(52.2296756)
+    lon1 = radians(21.0122287)
+    lat2 = radians(52.406374)
+    lon2 = radians(16.9251681)
+
+    dlon = lon2 - lon1
+    dlat = lat2 - lat1
+
+    a = sin(dlat / 2)**2 + cos(lat1) * cos(lat2) * sin(dlon / 2)**2
+    c = 2 * atan2(sqrt(a), sqrt(1 - a))
+
+    distance = R * c
+
+    print("Result:", distance)
+    print("Should be:", 278.546, "km")
+    return distance
+
 def sort_by_location(cws,zip):
     #breakpoint()
+    distances = {}
+
+    with open('../out.csv', newline='') as f:
+        reader = csv.reader(f)
+        data = list(reader)
+
+    for row in data:
+        if row[0] == '110021.0':
+            print(row)
+            break
+            
+    for cw in cws:
+        breakpoint()
+
+        cw.zipcode
+
+
+
     return cws
 
 @login_required
@@ -32,7 +72,7 @@ def index(request):
     for cw in coworks:
         cws.append(cw)
     if request.method == 'POST':
-        zip = request.method["pin"]
+        zip = request.POST["pin"]
         cws = sort_by_location(cws,zip)
     context={
       'coworks':cws
