@@ -46,11 +46,16 @@ def bookroom(request,id):
 
         if 'a_date' in request.POST:
             av_data = availability(request.POST['a_date'],id)
+            not_empty = True
+            # if len(av_data) >0:
+            #     not_empty = True
+
             form = BookingForm()
             #breakpoint()
             context={
               'date':request.POST['a_date'],
               'form':form,
+              'not_empty': not_empty,
               'availability':av_data
             }
             #breakpoint()

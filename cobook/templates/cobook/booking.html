@@ -24,27 +24,31 @@
          <button type="submit" class="btn btn-primary mb-2">Confirm Date</button>
       </form>
       <br>
-      {% if availability %}
+      {% if not_empty %}
       <h5> Schedule for date {{date}} </h5>
-      <table class="table table-striped">
-          <thead>
-            <tr>
+        {% if availability %}
+            <table class="table table-striped">
+                <thead>
+                  <tr>
 
-              <th scope="col">Booking For</th>
-              <th scope="col">Meeting Start Time</th>
-              <th scope="col">Meeting End time</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for av_data in availability %}
-            <tr>
-              <td>{{av_data.0}}</td>
-              <td>{{av_data.1}}</td>
-              <td>{{av_data.2}}</td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
+                    <th scope="col">Booking For</th>
+                    <th scope="col">Meeting Start Time</th>
+                    <th scope="col">Meeting End time</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for av_data in availability %}
+                  <tr>
+                    <td>{{av_data.0}}</td>
+                    <td>{{av_data.1}}</td>
+                    <td>{{av_data.2}}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+          {% else %}
+              <h5> No Other Bookings on this Day </h5>
+          {% endif %}
       {% endif %}
     </div>
   </div>
