@@ -7,6 +7,7 @@ from .models import *
 from .forms import *
 from datetime import date, datetime
 from math import sin, cos, sqrt, atan2, radians
+import csv
 
 
 # Create your views here.
@@ -26,11 +27,6 @@ from math import sin, cos, sqrt, atan2, radians
 def distance_calc(lat1,lon1,lat2,lon2):
     R = 6373.0
 
-    lat1 = radians(52.2296756)
-    lon1 = radians(21.0122287)
-    lat2 = radians(52.406374)
-    lon2 = radians(16.9251681)
-
     dlon = lon2 - lon1
     dlat = lat2 - lat1
 
@@ -39,31 +35,44 @@ def distance_calc(lat1,lon1,lat2,lon2):
 
     distance = R * c
 
-    print("Result:", distance)
-    print("Should be:", 278.546, "km")
     return distance
 
 def sort_by_location(cws,zip):
     #breakpoint()
     distances = {}
 
-    with open('../out.csv', newline='') as f:
+    # try:
+    with open('out.csv', newline='') as f:
         reader = csv.reader(f)
         data = list(reader)
 
+    zipstr = str(zip) + '.0'
+
     for row in data:
-        if row[0] == '110021.0':
-            print(row)
+        if row[0] == zipstr:
+            lat1 = radians(float(row[1]))
+            lon1 = radians(float(row[2]))
             break
-            
+
     for cw in cws:
-        breakpoint()
 
-        cw.zipcode
+        zip1 = cw.zipcode
+        zip1str = str(zip1) + '.0'
 
+        for row in data:
+            if row[0] == zip1str:
+                lat2 = radians(float(row[1]))
+                lon2 = radians(float(row[2]))
+                break
 
+        dist = distance_calc(lat1,lon1,lat2,lon2)
+        distances[cw] = dist
+    sorted_distances = dict(sorted(distances.items(), key=lambda x: x[1]))
+    return list(sorted_distances.keys())
+    breakpoint()
 
-    return cws
+    # except:
+    #     return cws
 
 @login_required
 def index(request):
