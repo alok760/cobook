@@ -30,6 +30,17 @@ def index(request):
     return render(request,'cobook/index.html', context)
 
 @login_required
+def bookings(request):
+    user = request.user
+    bks = Booking.objects.filter(user_id=user.id)
+    #breakpoint()
+    context={
+      'bks':bks
+    }
+
+    return render(request,'cobook/mybookings.html', context)
+
+@login_required
 def rooms(request,id):
     cowork = Cowork.objects.filter(id=id).last()
     rooms = cowork.room_set.all()
@@ -39,7 +50,7 @@ def rooms(request,id):
     #breakpoint()
     return render(request,'cobook/rooms.html', context)
 
-
+@login_required
 def bookroom(request,id):
 
     if request.method == 'POST':
@@ -134,8 +145,8 @@ def availability(date, room_id):
         data.append([book.user.username, str(book.start_time)[:-3],str(book.end_time)[:-3]])
     return data
 
-def your_bookings():
-    pass
+
+
 
 
 

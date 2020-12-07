@@ -1,0 +1,28 @@
+{% extends "cobook/base.html" %}
+{% load static %}
+{% block content %}
+      <h1 style="margin-bottom: 50px;">My Bookings</h1>
+
+
+      {% for bk in bks %}
+      <div class="card">
+        <div class="row no-gutters">
+            <div class="col-sm-12">
+                <div class="card-body">
+                    <h5 class="card-title">{{ bk.room.cowork}}</h5>
+                    <p class="card-text">
+                      <p><b>Room: {{ bk.room }}</b></p>
+                      <p><b>Date: </b> {{ bk.date }}</p>
+                      <p><b>Start time: </b> {{ bk.start_time }}</p>
+                      <p><b>End time: </b> {{ bk.end_time }}</p>
+                    </p>
+                    <!-- <a href="#" class="btn btn-primary">View Details</a> -->
+                </div>
+            </div>
+        </div>
+      </div>
+      <br>
+      {% endfor %}
+
+
+{% endblock %}
