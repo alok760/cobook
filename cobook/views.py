@@ -5,6 +5,7 @@ from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from .models import *
 from .forms import *
+from datetime import date
 
 # Create your views here.
 # Problem - Meeting Room Booking
@@ -40,6 +41,7 @@ def rooms(request,id):
 
 
 def bookroom(request,id):
+
     if request.method == 'POST':
         book = Booking()
         book.room = Room.objects.filter(id=id).last()
@@ -53,15 +55,31 @@ def bookroom(request,id):
             }
             form.save()
             return render(request, "cobook/booking_confirm.html", context)
-            #pass  # does nothing, just trigger the validation
+
         else:
             return render(request, "cobook/error_page.html")
 
     form = BookingForm()
     context={
+      'room_schedule': None,
       'form':form
     }
+    data = availability(date.today(),1)
+    #breakpoint()
     return render(request, "cobook/booking.html", context)
+
+
+def availability(date, room_id):
+    books = Booking.objects.filter(date=date.today())
+    data = []
+    for book in books:
+        data.append([book.user.username, str(book.start_time),str(book.end_time)])
+    return data
+
+def your_bookings():
+    pass
+
+
 
 # def bookroom(request):
 #     if request.method == 'POST':

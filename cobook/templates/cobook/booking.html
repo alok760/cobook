@@ -1,11 +1,52 @@
 {% extends "cobook/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-  <h1 style="margin-bottom: 50px;">Book Room</h1>
-  <form method="post" novalidate>
-    {% csrf_token %}
-    {{ form|crispy }}
-    <button type="submit" class="btn btn-success">Book!</button>
-  </form>
+
+  <div class="row">
+
+    <div class="col">
+      <h2 style="margin-bottom: 50px;">Book Room</h2>
+      <form method="post" novalidate>
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-success">Book!</button>
+      </form>
+    </div>
+
+    <div class="col">
+      <h2 style="margin-bottom: 60px;"> Check Availability </h2>
+
+      <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Booking For</th>
+              <th scope="col">Meeting Start Time</th>
+              <th scope="col">Meeting End time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>Jacob</td>
+              <td>Thornton</td>
+              <td>@fat</td>
+            </tr>
+            <tr>
+              <th scope="row">3</th>
+              <td>Larry</td>
+              <td>the Bird</td>
+              <td>@twitter</td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+  </div>
 
 {% endblock %}
