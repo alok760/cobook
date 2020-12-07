@@ -5,7 +5,7 @@ from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from .models import *
 from .forms import *
-from datetime import date
+from datetime import date, datetime
 
 # Create your views here.
 # Problem - Meeting Room Booking
@@ -73,11 +73,21 @@ def bookroom(request,id):
                 }
                 return render(request, "cobook/error_page.html", context)
 
+            request_date = request.POST['date']
+            rdate = datetime.strptime(request_date, '%Y-%m-%d')
+            now = datetime.now()
+            
+            if now > rdate:
+                context={
+                  'error_message':"Connot Book for past Date."
+                }
+                return render(request, "cobook/error_page.html", context)
+
 
             for adata in av_data:
                 s_time = adata[1]
                 e_time = adata[2]
-                breakpoint()
+                # breakpoint()
                 if start_time > s_time and start_time < e_time:
                     context={
                       'error_message':"Meeting Time collides with other Meetings."
@@ -90,9 +100,6 @@ def bookroom(request,id):
                     }
                     return render(request, "cobook/error_page.html", context)
 
-            ## current time
-                # breakpoint()
-                # pass
             context={
               'message':"success"
             }
